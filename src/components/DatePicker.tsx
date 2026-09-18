@@ -63,9 +63,9 @@ export default function DatePicker({
   const [dir, setDir] = useState<1 | -1>(1);
   const [justSelected, setJustSelected] = useState('');
   const rootRef = useRef<HTMLDivElement>(null);
-  const closeTimer = useRef<number>();
-  const monthTimer = useRef<number>();
-  const pickTimer = useRef<number>();
+  const closeTimer = useRef<number | undefined>(undefined);
+  const monthTimer = useRef<number | undefined>(undefined);
+  const pickTimer = useRef<number | undefined>(undefined);
 
   const cells = useMemo(() => {
     const year = cursor.getFullYear();

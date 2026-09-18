@@ -1,0 +1,8 @@
+{
+  "framework": "vite",
+  "buildCommand": "npx tsc -b && npx vite build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
+}

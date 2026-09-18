@@ -10,7 +10,8 @@ export type BillingFrequency = 'Monthly' | 'Quarterly' | 'Milestone' | 'One-time
 export type PaymentTerms = 'FTE' | 'TNM';
 export type BillingModel = 'FTE' | 'Fixed Price' | 'T&M' | 'Milestone' | 'Retainer' | 'Other';
 
-export type { ProjectDomain } from '../constants/domains';
+import type { ProjectDomain } from '../constants/domains';
+export type { ProjectDomain };
 export { PROJECT_DOMAINS } from '../constants/domains';
 
 export type ProjectStatus = 'Active' | 'On Hold' | 'Inactive';
