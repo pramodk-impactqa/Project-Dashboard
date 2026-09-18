@@ -34,20 +34,29 @@ export const securityHeaders = helmet({
 /**
  * CORS configuration — explicit origins, no wildcards.
  */
-export const corsMiddleware = cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-    if (SECURITY_CONFIG.cors.allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    callback(new Error('Not allowed by CORS'));
-  },
-  credentials: SECURITY_CONFIG.cors.credentials,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'X-Request-ID'],
-  exposedHeaders: ['X-Request-ID'],
-  maxAge: 600,
-});
+export function corsMiddleware(req: Request, res: Response, next: NextFunction): void {
+  const host = req.get('host') || '';
+  const selfHttps = `https://${host}`;
+  const selfHttp = `http://${host}`;
+  const allowed = new Set([
+    ...SECURITY_CONFIG.cors.allowedOrigins,
+    selfHttps,
+    selfHttp,
+  ]);
+
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowed.has(origin)) return callback(null, true);
+      callback(new Error('Not allowed by CORS'));
+    },
+    credentials: SECURITY_CONFIG.cors.credentials,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'X-Request-ID'],
+    exposedHeaders: ['X-Request-ID'],
+    maxAge: 600,
+  })(req, res, next);
+}
 
 /**
  * Request ID middleware — assigns a unique ID to each request for audit correlation.

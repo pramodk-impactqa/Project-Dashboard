@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: iqa-imanage
+    runtime: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    disk:
+      name: iqa-data
+      mountPath: /opt/render/project/src/server/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
+      - key: SESSION_SAMESITE
+        value: lax

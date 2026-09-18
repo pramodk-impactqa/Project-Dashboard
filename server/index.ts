@@ -88,9 +88,9 @@ async function main() {
 
   // ── 11. Start server ──────────────────────────────────────
   const port = SECURITY_CONFIG.server.port;
-  app.listen(port, () => {
+  app.listen(port, '0.0.0.0', () => {
     console.log(`\n🔒 IQA Finance Portal — Security-First Backend`);
-    console.log(`   Server running on http://localhost:${port}`);
+    console.log(`   Server running on http://0.0.0.0:${port}`);
     console.log(`   Environment: ${SECURITY_CONFIG.server.isProduction ? 'PRODUCTION' : 'DEVELOPMENT'}`);
     console.log(`   Session idle timeout: ${SECURITY_CONFIG.session.idleTimeoutMs / 60000} min`);
     console.log(`   Session absolute lifetime: ${SECURITY_CONFIG.session.absoluteLifetimeMs / 3600000} hr`);

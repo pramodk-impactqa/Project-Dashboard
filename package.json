@@ -33,6 +33,7 @@
     "react-router-dom": "^7.18.1",
     "recharts": "^3.9.2",
     "uuid": "^14.0.2",
+    "tsx": "^4.23.13",
     "xlsx": "^0.18.5",
     "zod": "^4.5.4"
   },
@@ -51,7 +52,6 @@
     "concurrently": "^10.0.5",
     "oxlint": "^1.71.0",
     "tailwindcss": "^4.3.3",
-    "tsx": "^4.23.13",
     "typescript": "~6.0.2",
     "vite": "^8.1.1"
   },

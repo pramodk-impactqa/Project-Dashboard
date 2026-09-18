@@ -4,6 +4,7 @@
  */
 import Database from 'better-sqlite3';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { randomUUID } from 'crypto';
 import argon2 from 'argon2';
@@ -11,12 +12,14 @@ import { SECURITY_CONFIG } from '../config/security.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DB_PATH = path.resolve(__dirname, '..', 'data', 'finance.db');
+const DATA_DIR = path.resolve(__dirname, '..', 'data');
+const DB_PATH = path.resolve(DATA_DIR, 'finance.db');
 
 let _db: Database.Database | null = null;
 
 export function getDb(): Database.Database {
   if (!_db) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
     _db = new Database(DB_PATH);
     _db.pragma('journal_mode = WAL');
     _db.pragma('foreign_keys = ON');

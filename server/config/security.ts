@@ -97,7 +97,7 @@ export const SECURITY_CONFIG = {
 
   // ── General ─────────────────────────────────────────────────
   server: {
-    port: envInt('SERVER_PORT', 3001),
+    port: envInt('PORT', envInt('SERVER_PORT', 3001)),
     isProduction: envStr('NODE_ENV', 'development') === 'production',
   },
 } as const;

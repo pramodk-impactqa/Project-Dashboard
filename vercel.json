@@ -1,5 +1,6 @@
 {
   "framework": "vite",
+  "installCommand": "npm install --omit=optional",
   "buildCommand": "npx tsc -b && npx vite build",
   "outputDirectory": "dist",
   "rewrites": [
